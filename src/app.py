@@ -37,15 +37,13 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-# GET USER
+# GET USERS
 
 
-@app.route('/user', methods=['GET'])
-def handle_hello():
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
-    return jsonify(response_body), 200
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    return jsonify([user.serialize() for user in users]), 200
 
 # GET PEOPLE
 
